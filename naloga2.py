@@ -6,7 +6,7 @@ def convolution(image, kernel):
     kernel_height, kernel_width = kernel.shape
 
     output = np.zeros_like(image)
-    
+
     padding_v = kernel_height // 2
     padding_s = kernel_width // 2
 
@@ -30,16 +30,8 @@ def filter_with_gaussian_kernel(image, sigma):
     gaussian_kernel /= (2 * np.pi * sigma ** 2)
     gaussian_kernel /= gaussian_kernel.sum()
 
-    # Padding to handle edges
-    padded_image = np.pad(image, [(kernel_size//2, kernel_size//2), (kernel_size//2, kernel_size//2)], mode='constant')
+    return convolution(image, gaussian_kernel)
 
-    # Convolution
-    filtered_image = np.zeros_like(image)
-    for i in range(image.shape[0]):
-        for j in range(image.shape[1]):
-            filtered_image[i, j] = np.sum(padded_image[i:i+kernel_size, j:j+kernel_size] * gaussian_kernel)
-
-    return filtered_image
 
 def filter_with_sobel_horizontal(image):
     sobel_kernel = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
