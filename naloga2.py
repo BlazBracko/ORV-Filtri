@@ -41,9 +41,9 @@ def filter_with_gaussian_kernel(image, sigma):
 
     return filtered_image
 
-def filtriraj_sobel_smer(slika):
-    '''Filtrira sliko z Sobelovim jedrom in označi gradiente v orignalni sliki glede na ustrezen pogoj.'''
-    pass
+def filter_with_sobel_horizontal(image):
+    sobel_kernel = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+    return convolution(image, sobel_kernel)
 
 if __name__ == '__main__':    
     pass
