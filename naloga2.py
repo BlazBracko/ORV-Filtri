@@ -37,5 +37,41 @@ def filter_with_sobel_horizontal(image):
     sobel_kernel = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
     return convolution(image, sobel_kernel)
 
-if __name__ == '__main__':    
-    pass
+
+def main():
+    colored_photo = cv.imread('lenna.png')
+
+    if colored_photo is None:
+        print("Photo not found.")
+    else:
+        channels = cv.split(colored_photo)
+        filtered_channels = []
+
+        sigma = 3.0
+        for channel in channels:
+            filtered_channel = filter_with_gaussian_kernel(channel, sigma)
+            filtered_channels.append(filtered_channel)
+
+        gaussian_filtered_image = cv.merge(filtered_channels)
+
+        cv.imshow('Original Image', colored_photo)
+        cv.imshow('Gaussian Filtered Image', gaussian_filtered_image)
+
+        gray_image = cv.cvtColor(gaussian_filtered_image, cv.COLOR_BGR2GRAY)
+        sobel_image = filter_with_sobel_horizontal(gray_image)
+
+        sobel_colored_image = cv.cvtColor(sobel_image, cv.COLOR_GRAY2BGR)
+
+        mask = sobel_image > 120
+        sobel_colored_image[mask] = [0, 0, 255]
+
+        cv.imshow('Sobel Filtered Image', sobel_colored_image)
+
+        cv.waitKey(0)
+        cv.destroyAllWindows()
+
+
+if __name__ == '__main__':
+    main()    
+
+
