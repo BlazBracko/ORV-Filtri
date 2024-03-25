@@ -5,8 +5,8 @@ def convolution(image, kernel):
     height, width = image.shape
     kernel_height, kernel_width = kernel.shape
 
-    output = null
-
+    output = np.zeros_like(image)
+    
     padding_v = kernel_height // 2
     padding_s = kernel_width // 2
 
