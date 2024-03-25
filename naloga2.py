@@ -39,7 +39,7 @@ def filter_with_sobel_horizontal(image):
 
 
 def main():
-    colored_photo = cv.imread('lenna.png')
+    colored_photo = cv.imread('.utils/lenna.png')
 
     if colored_photo is None:
         print("Photo not found.")
@@ -63,7 +63,7 @@ def main():
         sobel_colored_image = cv.cvtColor(sobel_image, cv.COLOR_GRAY2BGR)
 
         mask = sobel_image > 120
-        sobel_colored_image[mask] = [0, 0, 255]
+        sobel_colored_image[mask] = [0, 255, 0]
 
         cv.imshow('Sobel Filtered Image', sobel_colored_image)
 
@@ -71,7 +71,7 @@ def main():
         cv.destroyAllWindows()
 
 
-if __name__ == '__main__':
-    main()    
+if __name__ == '__main__':   
+    main() 
 
-
+    
