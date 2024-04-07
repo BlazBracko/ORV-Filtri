@@ -2,7 +2,7 @@ import naloga2
 
 def test_image_loading(self):
         # Preverite, ali se slika pravilno naloži
-        image = cv.imread('.utils/lenna.png')
+        image = cv.imread('/lenna.png')
         self.assertIsNotNone(image, "Failed to load image.")
   
 def test_filter_dimensions(self):
