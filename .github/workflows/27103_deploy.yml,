@@ -6,7 +6,7 @@ env:
   REPO_NAME: ${{ secrets.REPO_NAME }}
 on:
   workflow_run:
-    workflows: ["Run Tests"]
+    workflows: ["Run Image Processing Tests"]
     branches: [main]
     types:
       - completed
