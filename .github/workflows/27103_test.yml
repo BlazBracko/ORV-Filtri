@@ -9,7 +9,7 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        python-version: [ '3.12.0' ]
+        python-version: [ '3.9', '3.10' ]  # Ensure consistency across jobs
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -33,7 +33,7 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        python-version: [ '3.12.0' ]
+        python-version: [ '3.9', '3.10' ]  # Ensure consistency across jobs
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
