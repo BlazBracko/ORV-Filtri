@@ -1,28 +1,30 @@
 name: Deploy to DockerHub
 
 env:
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  REPO_NAME: ${{ secrets.REPO_NAME }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }} # Uporabi skrivnost za DockerHub uporabniško ime.
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} # Uporabi skrivnost za DockerHub geslo ali token.
+  REPO_NAME: ${{ secrets.REPO_NAME }} # Uporabi skrivnost za ime DockerHub repozitorija.
 on:
   workflow_run:
-    workflows: ["Run Image Processing Tests"]
-    branches: [main]
+    workflows: ["Run Image Processing Tests"] # Ta delovni tok se sproži, ko se delovni tok 'Run Image Processing Tests' uspešno zaključi.
+    branches: [main] # Delovni tok se sproži le na glavni veji.
     types:
-      - completed
+      - completed # Delovni tok se sproži, ko je predhodni delovni tok zaključen.
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: self-hosted # Delovni tok se izvaja na samohostovanem runnerju.
     steps:
       - name: Checkout repozitorija
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 # Pridobi kodo repozitorija.
 
       - name: Login to Docker
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        # Prijava v DockerHub z uporabo skrivnosti za uporabniško ime in geslo/token.
 
       - name: Current time
         run: echo "CURRENT_DATE=$(date +'%Y-%m-%d--%H-%M-%S')" >> $GITHUB_ENV
+        # Shrani trenutni datum in čas v spremenljivko okolja, ki se uporabi za označevanje slike.
 
       - name: Build and push Docker image
         run: |
