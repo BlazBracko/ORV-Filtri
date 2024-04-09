@@ -3,7 +3,7 @@
 DOCKER_USERNAME=$1
 DOCKER_PASSWORD=$2
 REPO_NAME=$3
-IMAGE_TAG=$(date +'%Y-%m-%d--%H-%M-%S') # Generiraj trenutni časovni žig
+IMAGE_TAG=$(date +'%Y-%m-%d--%H-%M-%S') # Generiraj trenutni časovni tag
 
 # Prijavi se v DockerHub
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
