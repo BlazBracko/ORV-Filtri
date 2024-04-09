@@ -26,7 +26,6 @@ jobs:
         run: echo "CURRENT_DATE=$(date +'%Y-%m-%d--%H-%M-%S')" >> $GITHUB_ENV
         # Shrani trenutni datum in čas v spremenljivko okolja, ki se uporabi za označevanje slike.
 
-      - name: Build and push Docker image
-        run: |
-          docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPO_NAME:${{ env.CURRENT_DATE }}
-          docker push $DOCKER_USERNAME/$REPO_NAME:${{ env.CURRENT_DATE }}
+      - name: Pripravi in potisni Docker sliko
+        run: bash zapakiraj_27103.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }} ${{ secrets.REPO_NAME }}
+
